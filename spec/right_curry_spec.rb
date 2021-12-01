@@ -2,7 +2,7 @@
 
 require "right_curry"
 
-RSpec.describe Method do
+RSpec.describe "right_curry" do # rubocop:disable RSpec/DescribeClass
   def dummy_method(first, second)
     [second, first]
   end

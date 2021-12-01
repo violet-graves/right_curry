@@ -1,4 +1,6 @@
 require: rubocop-rspec
+AllCops:
+  TargetRubyVersion: 2.7.0
 
 Style/EmptyLiteral:
   Enabled: false
