@@ -18,6 +18,7 @@ RSpec.describe "right_curry" do # rubocop:disable RSpec/DescribeClass
     def dummy_method(first, second, third)
       [second, third, first]
     end
+
     subject(:result) do
       method(:dummy_method).right_curry[1][4][7]
     end
@@ -31,6 +32,7 @@ RSpec.describe "right_curry" do # rubocop:disable RSpec/DescribeClass
     def dummy_method(first, second, third, fourth)
       [second, fourth, third, first]
     end
+
     subject(:result) do
       method(:dummy_method).right_curry[1][4][7][3]
     end

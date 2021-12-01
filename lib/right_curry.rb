@@ -6,17 +6,13 @@ class Proc
 
     Array.new.then do |arguments|
       ->(first) { call(first, *arguments.slice(1..)) }
-        .then { |inner| [inner, *(1...arity).to_a] }
+        .then { |rightmost| [rightmost, *(1...arity)] }
         .reduce(&method(:reduce_curry).curry[arguments])
     end
   end
 
   def reduce_curry(arguments, memo, index)
-    lambda do |next_argument|
-      arguments[index] = next_argument
-
-      memo
-    end
+    ->(next_argument) { (arguments[index] = next_argument) && memo }
   end
 end
 
