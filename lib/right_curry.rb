@@ -5,15 +5,15 @@ module RightCurry
     def right_curry
       return call if arity.zero?
 
-      Array.new.then do |arguments|
-        ->(first) { call(first, *arguments.slice(1..)) }
+      Hash.new.then do |arguments|
+        ->(first) { call(first, *arguments.values.reverse) }
           .then { |rightmost| [rightmost, *(1...arity)] }
           .reduce(&method(:reduce_curry).curry[arguments])
       end
     end
 
     def reduce_curry(arguments, memo, index)
-      ->(next_argument) { (arguments[index] = next_argument) && memo }
+      ->(next_argument) { arguments.merge!(index => next_argument) && memo }
     end
   end
 
