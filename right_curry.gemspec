@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |spec|
   spec.name                  = "right_curry"
-  spec.version               = "0.0.0"
+  spec.version               = "0.1.0"
   spec.summary               = "For those who want to curry the other way"
   spec.description           = "Now you can"
   spec.authors               = ["Violet Graves"]
@@ -16,6 +16,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rubocop", "~> 1.23"
   spec.add_development_dependency "rubocop-rspec"
   spec.metadata = {
-    "rubygems_mfa_required" => "true"
+    "rubygems_mfa_required" => "false"
   }
 end
