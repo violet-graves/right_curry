@@ -8,12 +8,12 @@ module RightCurry
       Hash.new.then do |arguments|
         ->(first) { call(first, *arguments.values.reverse) }
           .then { |rightmost| [rightmost, *(1...arity)] }
-          .reduce(&method(:reduce_curry).curry[arguments])
+          .reduce do |memo, index|
+            lambda do |next_argument|
+              arguments.merge!(index => next_argument) and return memo
+            end
+          end
       end
-    end
-
-    def reduce_curry(arguments, memo, index)
-      ->(next_argument) { arguments.merge!(index => next_argument) && memo }
     end
   end
 

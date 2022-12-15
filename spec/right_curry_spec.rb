@@ -3,22 +3,41 @@
 require "right_curry"
 
 RSpec.describe RightCurry do
-  def dummy_method(first, second)
-    [second, first]
-  end
-  subject(:result) do
-    method(:dummy_method).right_curry[1][7]
-  end
-
-  let(:expected_result) { [1, 7] }
-
-  it { is_expected.to eq(expected_result) }
-
-  context "with 3-arity" do
-    def dummy_method(first, second, third)
-      [second, third, first]
+  context "with 0-arity" do
+    def dummy_method = Array.new
+    subject(:result) do
+      method(:dummy_method).right_curry
     end
 
+    let(:expected_result) { Array.new }
+
+    it { is_expected.to eq(expected_result) }
+  end
+
+  context "with 1-arity" do
+    def dummy_method(first) = [first]
+    subject(:result) do
+      method(:dummy_method).right_curry[1]
+    end
+
+    let(:expected_result) { [1] }
+
+    it { is_expected.to eq(expected_result) }
+  end
+
+  context "with 2-arity" do
+    def dummy_method(first, second) = [second, first]
+    subject(:result) do
+      method(:dummy_method).right_curry[1][7]
+    end
+
+    let(:expected_result) { [1, 7] }
+
+    it { is_expected.to eq(expected_result) }
+  end
+
+  context "with 3-arity" do
+    def dummy_method(first, second, third) = [second, third, first]
     subject(:result) do
       method(:dummy_method).right_curry[1][4][7]
     end
