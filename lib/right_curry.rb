@@ -9,17 +9,13 @@ module RightCurry
         ->(first) { call(first, *arguments.values.reverse) }
           .then { |rightmost| [rightmost, *(1...arity)] }
           .reduce do |memo, index|
-            lambda do |next_argument|
-              arguments.merge!(index => next_argument) and return memo
+            lambda do |argument|
+              arguments.merge!(index => argument) and return memo
             end
           end
       end
     end
   end
 
-  Method.class_eval do
-    def right_curry
-      to_proc.right_curry
-    end
-  end
+  Method.class_eval { def right_curry = to_proc.right_curry }
 end
